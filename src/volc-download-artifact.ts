@@ -90,7 +90,7 @@ async function run(): Promise<void> {
   for (const artifact of artifacts) {
     await artifactClient.downloadArtifact(artifact.id, {
       ...options,
-      path: inputs.mergeMultiple
+      path: isSingleArtifactDownload || inputs.mergeMultiple
         ? resolvedPath
         : path.join(resolvedPath, artifact.name),
       artifactName: artifact.name

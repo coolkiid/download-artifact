@@ -192689,7 +192689,7 @@ function run() {
             });
         }
         for (const artifact of artifacts) {
-            yield artifact_1.default.downloadArtifact(artifact.id, Object.assign(Object.assign({}, options), { path: inputs.mergeMultiple
+            yield artifact_1.default.downloadArtifact(artifact.id, Object.assign(Object.assign({}, options), { path: isSingleArtifactDownload || inputs.mergeMultiple
                     ? resolvedPath
                     : path.join(resolvedPath, artifact.name), artifactName: artifact.name }));
         }
