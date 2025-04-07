@@ -2,7 +2,7 @@ deps = {
     "toolkit": {
         "type": "git",
         "url": "git@github.com:lynx-infra/toolkit.git",
-        "commit": "8a2cc345c23ea60dbc21fcaa8cbd3f997ccd5dea",
+        "commit": "6c705231f509bbe40a065786e5d32890e1a67b99",
         "paths": ["packages/artifact"]
     }
 }

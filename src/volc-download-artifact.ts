@@ -30,6 +30,19 @@ async function run(): Promise<void> {
   core.debug(`Resolved path is ${resolvedPath}`)
 
   const options: FindOptions = {}
+  const [repositoryOwner, repositoryName] = inputs.repository.split('/')
+  if (!repositoryOwner || !repositoryName) {
+    throw new Error(
+      `Invalid repository: '${inputs.repository}'. Must be in format owner/repo`
+    )
+  }
+
+  options.findBy = {
+    token: '',
+    workflowRunId: inputs.runID,
+    repositoryName,
+    repositoryOwner
+  }
 
   let artifacts: Artifact[] = []
 
@@ -90,9 +103,10 @@ async function run(): Promise<void> {
   for (const artifact of artifacts) {
     await artifactClient.downloadArtifact(artifact.id, {
       ...options,
-      path: isSingleArtifactDownload || inputs.mergeMultiple
-        ? resolvedPath
-        : path.join(resolvedPath, artifact.name),
+      path:
+        isSingleArtifactDownload || inputs.mergeMultiple
+          ? resolvedPath
+          : path.join(resolvedPath, artifact.name),
       artifactName: artifact.name
     })
   }
